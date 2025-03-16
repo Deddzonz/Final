@@ -102,9 +102,7 @@ def export_to_pdf(recommendations, future_df):
     for _, row in future_df.iterrows():
         pdf.cell(200, 10, f"{row['Дата'].strftime('%Y-%m-%d')} - {round(row['Прогноз продаж'], 2)}", ln=True)
 
-    output = BytesIO()
-    pdf.output(output, 'F')
-    return output.getvalue()
+    return pdf.output(dest='S').encode('latin1')  # Возвращаем PDF как байтовую строку
 
 # Основная функция
 def main():
