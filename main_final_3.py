@@ -8,6 +8,7 @@ import numpy as np
 from io import BytesIO
 from fpdf import FPDF
 import xgboost as xgb
+import os
 
 def load_data(file):
     df = pd.read_excel(file)
@@ -60,7 +61,8 @@ def plot_map(df):
 def export_to_pdf(recommendations, future_df):
     pdf = FPDF()
     pdf.add_page()
-    pdf.set_font("Arial", size=12)
+    pdf.add_font("DejaVu", "", "DejaVuSans.ttf", uni=True)
+    pdf.set_font("DejaVu", size=12)
     pdf.cell(200, 10, "Отчет по продажам", ln=True, align='C')
     pdf.multi_cell(0, 10, recommendations)
     pdf.cell(200, 10, "Прогноз на 30 дней:", ln=True)
@@ -89,3 +91,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
